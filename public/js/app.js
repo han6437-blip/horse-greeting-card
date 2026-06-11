@@ -9,8 +9,8 @@
   // ═══════════════════════════════════════
   // Configuration
   // ═══════════════════════════════════════
-  const SUPABASE_URL = 'https://XXXXXXXXXXXX.supabase.co'; // 部署时替换
-  const SUPABASE_ANON_KEY = 'YOUR_ANON_KEY';               // 部署时替换
+  const SUPABASE_URL = 'https://iajpcsbebjjtaaspmwws.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImlhanBjc2JlYmpqdGFhc3Btd3dzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODExNDI4MzksImV4cCI6MjA5NjcxODgzOX0.yzYJd8pUPZzoWH-GutFC5uzwv2oRH0MGNdoitR4UO_4';
 
   // ═══════════════════════════════════════
   // State
