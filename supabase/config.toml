@@ -1,0 +1,28 @@
+# Supabase Project Configuration
+project_id = "horse-greeting-card"
+
+[api]
+enabled = true
+port = 54321
+
+[db]
+port = 54322
+
+[studio]
+enabled = true
+port = 54323
+
+[functions]
+enabled = true
+
+[functions.generate-greeting]
+enabled = true
+
+[functions.generate-card-image]
+enabled = true
+
+[auth]
+enabled = false
+
+[storage]
+enabled = false

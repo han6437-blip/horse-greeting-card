@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="theme-color" content="#C41E3A">
+  <title>马年贺卡生成器</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- 背景装饰层 -->
+  <div class="bg-decorations" id="bgDecorations">
+    <div class="plum-blossom" style="left:5%;animation-delay:0s;"></div>
+    <div class="plum-blossom" style="left:15%;animation-delay:2s;"></div>
+    <div class="plum-blossom" style="left:25%;animation-delay:4s;"></div>
+    <div class="plum-blossom" style="left:35%;animation-delay:1s;"></div>
+    <div class="plum-blossom" style="left:45%;animation-delay:3s;"></div>
+    <div class="plum-blossom" style="left:55%;animation-delay:5s;"></div>
+    <div class="plum-blossom" style="left:65%;animation-delay:2s;"></div>
+    <div class="plum-blossom" style="left:75%;animation-delay:4s;"></div>
+    <div class="plum-blossom" style="left:85%;animation-delay:1s;"></div>
+    <div class="plum-blossom" style="left:95%;animation-delay:3s;"></div>
+
+    <div class="sparkle" style="left:10%;top:20%;animation-delay:0s;"></div>
+    <div class="sparkle" style="left:30%;top:15%;animation-delay:1.5s;"></div>
+    <div class="sparkle" style="left:50%;top:25%;animation-delay:0.8s;"></div>
+    <div class="sparkle" style="left:70%;top:18%;animation-delay:2.2s;"></div>
+    <div class="sparkle" style="left:85%;top:22%;animation-delay:3s;"></div>
+    <div class="sparkle" style="left:20%;top:30%;animation-delay:1.2s;"></div>
+    <div class="sparkle" style="left:60%;top:28%;animation-delay:2.8s;"></div>
+    <div class="sparkle" style="left:40%;top:35%;animation-delay:0.5s;"></div>
+  </div>
+
+  <!-- Canvas 烟花层 -->
+  <canvas id="fireworkCanvas"></canvas>
+
+  <!-- 主容器 -->
+  <div class="container">
+    <!-- 顶部装饰 -->
+    <div class="top-decoration">
+      <div class="lantern lantern-left">
+        <div class="lantern-body"></div>
+        <div class="lantern-tassel"></div>
+      </div>
+      <div class="lantern lantern-right">
+        <div class="lantern-body"></div>
+        <div class="lantern-tassel"></div>
+      </div>
+    </div>
+
+    <!-- 标题区 -->
+    <header class="header">
+      <h1 class="title">马年贺卡生成器</h1>
+      <p class="subtitle">丙午年 · 新春祝福</p>
+    </header>
+
+    <!-- 骏马动画区 -->
+    <div class="horse-area">
+      <div class="horse-runner">
+        <svg class="horse-svg" viewBox="0 0 120 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <g fill="#D4A017">
+            <ellipse cx="85" cy="25" rx="18" ry="22" transform="rotate(-15,85,25)"/>
+            <ellipse cx="60" cy="45" rx="22" ry="14" transform="rotate(-5,60,45)"/>
+            <rect x="20" y="55" width="50" height="10" rx="4" transform="rotate(-8,20,55)"/>
+            <rect x="15" y="35" width="28" height="8" rx="4" transform="rotate(-30,15,35)"/>
+            <rect x="18" y="35" width="26" height="8" rx="4" transform="rotate(20,18,35)"/>
+            <ellipse cx="98" cy="18" rx="6" ry="5"/>
+            <circle cx="100" cy="16" r="2" fill="#C41E3A"/>
+            <path d="M100 14 Q108 8 105 14" stroke="#D4A017" stroke-width="2" fill="none"/>
+            <path d="M55 50 L28 68 M52 52 L20 70" stroke="#D4A017" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M32 42 L12 20 M35 44 L15 22" stroke="#D4A017" stroke-width="2.5" stroke-linecap="round"/>
+            <path d="M68 42 L78 15" stroke="#D4A017" stroke-width="3" stroke-linecap="round"/>
+          </g>
+        </svg>
+      </div>
+      <div class="horse-shadow"></div>
+    </div>
+
+    <!-- 贺词展示区 -->
+    <div class="greeting-section" id="greetingSection">
+      <div class="greeting-placeholder" id="greetingPlaceholder">
+        <p class="placeholder-text">点击下方按钮</p>
+        <p class="placeholder-sub">AI 为您创作马年贺词</p>
+      </div>
+      <div class="greeting-content" id="greetingContent">
+        <div class="greeting-scroll">
+          <div class="greeting-paper">
+            <div class="paper-border">
+              <p class="greeting-text" id="greetingText"></p>
+            </div>
+          </div>
+        </div>
+        <div class="greeting-actions" id="greetingActions">
+          <button class="action-btn copy-btn" id="copyBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24"><rect x="8" y="2" width="12" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="M16 4h2a2 2 0 012 2v14a2 2 0 01-2 2H8a2 2 0 01-2-2V6a2 2 0 012-2h2" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <span>复制贺词</span>
+          </button>
+          <button class="action-btn image-btn" id="imageBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><circle cx="8.5" cy="8.5" r="1.5" fill="currentColor"/><path d="M21 15l-5-5L5 21" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <span>生成贺卡图</span>
+          </button>
+          <button class="action-btn retry-btn" id="retryBtn">
+            <svg width="16" height="16" viewBox="0 0 24 24"><path d="M1 4v6h6M23 20v-6h-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><path d="M20.49 9A9 9 0 005.64 5.64L1 10m22 4l-4.64 4.36A9 9 0 013.51 15" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+            <span>重新生成</span>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 生成按钮 -->
+    <div class="generate-btn-wrap">
+      <button class="generate-btn" id="generateBtn">
+        <span class="btn-icon">🎊</span>
+        <span id="generateBtnText">生成马年贺词</span>
+        <span class="btn-loading" id="btnLoading">
+          <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast -->
+  <div class="toast" id="toast">
+    <span class="toast-icon"></span>
+    <span class="toast-text"></span>
+  </div>
+
+  <!-- Canvas 用于合成贺卡（隐藏） -->
+  <canvas id="cardCanvas" style="display:none;"></canvas>
+
+  <!-- 图片预览弹窗 -->
+  <div class="image-modal" id="imageModal">
+    <div class="modal-backdrop"></div>
+    <div class="modal-content">
+      <div class="modal-header">
+        <span class="modal-title">贺卡预览</span>
+        <button class="modal-close" id="modalClose">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-loading" id="modalLoading">
+          <div class="loading-spinner"></div>
+          <p>AI 正在绘制贺卡背景...</p>
+        </div>
+        <img id="modalImage" alt="贺卡预览" style="display:none;" />
+      </div>
+      <div class="modal-footer" id="modalFooter" style="display:none;">
+        <button class="download-btn" id="downloadBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <span>下载贺卡</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+</body>
+</html>
